@@ -10,8 +10,11 @@ import {
     Alert,
     ScrollView} from 'react-native';
 
+import SantaAnimation from '../Components/SantaAnimation';
 import db from '../Config';
 import firebase from 'firebase';
+
+
 
 export default class LoginScreen extends Component{
   constructor(){
@@ -59,9 +62,9 @@ export default class LoginScreen extends Component{
  }
 
 userLogin = (emailID, password)=>{
-   firebase.auth().signInWithEmailAndPassword(emailId, password)
+   firebase.auth().signInWithEmailAndPassword(emailID, password)
    .then(()=>{
-     this.props.navigation.navigate('DonateItems')
+     this.props.navigation.navigate('DonateBooks')
    })
    .catch((error)=> {
      var errorCode = error.code;
@@ -186,7 +189,7 @@ showModal = ()=>{
             this.showModal()
           }
         <View style={{justifyContent:'center', alignItems:'center'}}>
-          
+          <SantaAnimation/>
           <Text style={styles.title}>Barter System</Text>
         </View>
         <View>

@@ -8,9 +8,11 @@ import {
     StyleSheet,
     TouchableOpacity,
     Alert,
-    ScrollView, TouchableOpacity} from 'react-native';
+    ScrollView} from 'react-native';
 import db from '../Config';
 import firebase from 'firebase';
+import Myheader from '../Components/Myheader';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 export default class SettingsScreen extends Component{
     constructor(){
@@ -51,12 +53,14 @@ export default class SettingsScreen extends Component{
       componentDidMount(){this.getuserdetails()}
       render(){
           return(
+            <SafeAreaProvider>
             <View style={styles.modalContainer}>
+              <Myheader title="Settings" navigation={this.props.navigation}></Myheader>
             <ScrollView style={{width:'100%'}}>
               <KeyboardAvoidingView style={styles.KeyboardAvoidingView}>
               <Text
                 style={styles.modalTitle}
-                >Registration</Text>
+                >Change your settings</Text>
               <TextInput
                 style={styles.formTextInput}
                 placeholder ={"First Name"}
@@ -105,12 +109,13 @@ export default class SettingsScreen extends Component{
                     this.updateusers()
                   }
                 >
-                <Text style={styles.registerButtonText}>Register</Text>
+                <Text style={styles.registerButtonText}>Confirm</Text>
                 </TouchableOpacity>
               </View>
               </KeyboardAvoidingView>
             </ScrollView>
           </View>
+          </SafeAreaProvider>
           )
       }
 }

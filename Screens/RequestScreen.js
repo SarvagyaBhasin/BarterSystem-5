@@ -13,37 +13,40 @@ import {
 import Myheader from '../Components/Myheader';
 import db from '../Config';
 import firebase from 'firebase';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+
 export default class RequestScreen extends Component{
     constructor(){
         super();
         this.state={
             userID:firebase.auth().currentUser.email,
-            bookName:'',
+            objectName:'',
             Reason:''
         }
     }
     createUniqueID(){
         return Math.random().toString(36).substring(7);
     }
-    addrequest=(bookName, Reason)=>{
+    addrequest=(objectName, Reason)=>{
         var userID=this.state.userID;
         var requestID=this.createUniqueID();
-        db.collection('requestedBooks').add({
+        db.collection('requestedObject').add({
             "userID":userID,
             "requestID":requestID,
-            "bookName":bookName,
+            "objectName":objectName,
             "Reason":Reason
         })
         this.setState({bookName:'', Reason:''});
-        Alert.alert("Book Requested successfully")
+        Alert.alert("Object Requested successfully")
     }
     render(){
         return(
+          <SafeAreaProvider>
             <View style={{flex:1}}>
-                <Myheader title="Request Book" navigation={this.props.navigation}/>
+                <Myheader title="Request Object" navigation={this.props.navigation}/>
                 <KeyboardAvoidingView style={styles.KeyboardAvoidingView}>
                     <TextInput style={styles.formTextInput}
-                    placeholder={"BookName"}
+                    placeholder={"ObjectName"}
                     onChangeText={(text)=>{this.setState({bookName:text})}}
                     value={this.state.bookName}
                     />
@@ -62,6 +65,7 @@ export default class RequestScreen extends Component{
          </TouchableOpacity>
                 </KeyboardAvoidingView>
             </View>
+            </SafeAreaProvider>
         )
     }
 }

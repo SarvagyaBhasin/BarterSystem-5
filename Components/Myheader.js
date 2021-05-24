@@ -11,3 +11,4 @@ const Myheader = props=>{
         />
     )
 }
+export default Myheader

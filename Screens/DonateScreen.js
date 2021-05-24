@@ -17,7 +17,7 @@ export default class Donate extends Component{
         this.requestRef=null
     }
     getRequestList=()=>{
-        this.requestRef=db.collection("requestedBooks").onSnapshot((snapshot)=>{
+        this.requestRef=db.collection("requestedObjects").onSnapshot((snapshot)=>{
             var requestList=snapshot.docs.map(doc=>doc.data());
             this.setState({
                 requestList:requestList
@@ -51,12 +51,12 @@ export default class Donate extends Component{
     render(){
         return(
          <View style={{flex:1}}>
-             <Myheader title="DonateBooks" navigation={this.props.navigation}></Myheader>
+             <Myheader title="DonateObjects" navigation={this.props.navigation}></Myheader>
              <View style={{flex:1}}>
                  {
                      this.state.requestList.length==0?(
                          <View style={styles.container}>
-                             <Text style={{fontSize:20}}>List of all books requested</Text>
+                             <Text style={{fontSize:20}}>List of all things requested</Text>
                          </View>
                      ):(
                          <FlatList
